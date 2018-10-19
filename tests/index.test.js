@@ -1,7 +1,7 @@
 'use strict';
 
 var expect = require('expect.js'),
-    Skill = require('../src');
+    Skill = require('../service/src/Skill');
 
 describe('Rail Baron Alexa Skill', function() {
 

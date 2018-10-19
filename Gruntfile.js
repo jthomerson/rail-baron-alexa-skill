@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 
    config = {
       js: {
-         all: [ 'Gruntfile.js', 'src/**/*.js', 'test/**/*.js' ],
+         all: [ 'Gruntfile.js', 'service/src/**/*.js', 'test/**/*.js' ],
       },
    };
 

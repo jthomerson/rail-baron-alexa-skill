@@ -1,0 +1,72 @@
+service: rail-baron-alexa-skill
+
+frameworkVersion: 1.32.0
+
+custom:
+   defaultRegion: us-east-1
+   defaultEnvironmentGroup: prd
+   region: ${opt:region, self:custom.defaultRegion}
+   stage: ${opt:stage, env:USER}
+   environmentGroup: ${opt:environmentGroup, self:custom.defaultEnvironmentGroup}
+   objectPrefix: '${self:service}-${self:custom.stage}'
+   alexa:
+      vendorId: ${env:AMAZON_VENDOR_ID}
+      clientId: ${env:AMAZON_CLIENT_ID}
+      clientSecret: ${env:AMAZON_CLIENT_SECRET}
+      skills:
+         -
+            id: ${env:ALEXA_SKILL_ID}
+            manifest:
+               publishingInformation:
+                  locales:
+                     en-US:
+                        name: rail-baron
+               apis:
+                  custom:
+                     endpoint:
+                        uri: arn:aws:lambda:${self:custom.region}:${env:AWS_ACCOUNT_ID}:function:${self:custom.objectPrefix}
+               manifestVersion: '1.0'
+            models:
+               en-US:
+                  interactionModel:
+                     languageModel:
+                        invocationName: rail baron
+                        intents:
+                           -
+                              name: RollIntent
+                              slots:
+                                 -
+                                    name: NumberOne
+                                    type: AMAZON.NUMBER
+                                 -
+                                    name: NumberTwo
+                                    type: AMAZON.NUMBER
+                              samples:
+                                 - I rolled {NumberOne} and a {NumberTwo}
+
+plugins:
+   - serverless-alexa-skills
+
+provider:
+   name: aws
+   runtime: nodejs6.10
+   stackTags: # STAGE is automatically added by SLS
+      CODE_VERSION: ${file(../node_modules/silvermine-serverless-utils/src/get-code-version.js):both}
+      SLS_SVC_NAME: ${self:service}
+      ENV_GROUP: ${self:custom.environmentGroup}
+   deploymentBucket: root-resources-${self:custom.region}-${self:custom.environmentGroup}-deploys
+   region: ${self:custom.region}
+   stage: ${self:custom.stage}
+   environment:
+      CODE_VERSION: ${file(../node_modules/silvermine-serverless-utils/src/get-code-version.js):both}
+      SLS_SVC_NAME: ${self:service}
+      SLS_STAGE: ${self:custom.stage}
+
+functions:
+   skill:
+      name: '${self:custom.objectPrefix}'
+      handler: src/Skill.handler
+      memorySize: 128
+      timeout: 1
+      events:
+         - alexaSkill: ${env:ALEXA_SKILL_ID}
