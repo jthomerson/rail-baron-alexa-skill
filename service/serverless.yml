@@ -31,18 +31,33 @@ custom:
                   interactionModel:
                      languageModel:
                         invocationName: rail baron
+                        types:
+                           -
+                              name: ArticleType
+                              values:
+                                 - { name: { value: a, synonyms: [ an ] } }
+                           -
+                              name: OddOrEven
+                              values:
+                                 - { name: { value: odd } }
+                                 - { name: { value: even } }
                         intents:
                            -
                               name: RollIntent
                               slots:
                                  -
-                                    name: NumberOne
+                                    name: number
                                     type: AMAZON.NUMBER
                                  -
-                                    name: NumberTwo
-                                    type: AMAZON.NUMBER
+                                    name: oddOrEven
+                                    type: OddOrEven
+                                 -
+                                    name: article
+                                    type: ArticleType
                               samples:
-                                 - I rolled {NumberOne} and a {NumberTwo}
+                                 - '{number} {oddOrEven}'
+                                 - '{article} {number} {oddOrEven}'
+                                 - 'I rolled {article} {number} {oddOrEven}'
 
 plugins:
    - serverless-alexa-skills

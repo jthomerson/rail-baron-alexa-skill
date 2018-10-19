@@ -1,9 +1,16 @@
 'use strict';
 
-module.exports = {
+var Alexa = require('ask-sdk-core'),
+    skillBuilder = Alexa.SkillBuilders.custom();
 
-   handler: function() {
-      console.log(arguments);
-   },
+/* eslint-disable no-global-require */
 
-};
+exports.handler = skillBuilder
+   .addRequestHandlers(
+   require('./handlers/LaunchRequestHandler'),
+   require('./handlers/RollIntentHandler'),
+   require('./handlers/ExitHandler'),
+   require('./handlers/SessionEndedHandler')
+   )
+   .addErrorHandlers(require('./handlers/ErrorHandler'))
+   .lambda();
