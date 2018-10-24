@@ -41,23 +41,104 @@ custom:
                               values:
                                  - { name: { value: odd } }
                                  - { name: { value: even } }
+                           -
+                              name: Region
+                              values:
+                                 - { name: { value: Northeast } }
+                                 - { name: { value: Southeast } }
+                                 - { name: { value: North Central } }
+                                 - { name: { value: South Central } }
+                                 - { name: { value: Plains } }
+                                 - { name: { value: Northwest } }
+                                 - { name: { value: Southwest } }
                         intents:
                            -
-                              name: RollIntent
+                              name: RollRegionIntent
                               slots:
                                  -
-                                    name: number
+                                    name: regionNumber
                                     type: AMAZON.NUMBER
                                  -
-                                    name: oddOrEven
+                                    name: regionOddOrEven
                                     type: OddOrEven
                                  -
                                     name: article
                                     type: ArticleType
                               samples:
-                                 - '{number} {oddOrEven}'
-                                 - '{article} {number} {oddOrEven}'
-                                 - 'I rolled {article} {number} {oddOrEven}'
+                                 - '{regionNumber} {regionOddOrEven}'
+                                 - '{article} {regionNumber} {regionOddOrEven}'
+                                 - 'I rolled {article} {regionNumber} {regionOddOrEven}'
+                           -
+                              name: ChangeRegionIntent
+                              slots:
+                                 -
+                                    name: rolledDestinationRegion
+                                    type: Region
+                                 -
+                                    name: destinationRegion
+                                    type: Region
+                              samples:
+                                 - 'I am already in the {rolledDestinationRegion} I want to go to the {destinationRegion}'
+                           -
+                              name: RollCityIntent
+                              slots:
+                                 -
+                                    name: cityNumber
+                                    type: AMAZON.NUMBER
+                                 -
+                                    name: cityOddOrEven
+                                    type: OddOrEven
+                                 -
+                                    name: article
+                                    type: ArticleType
+                              samples:
+                                 - '{cityNumber} {cityOddOrEven}'
+                                 - '{article} {cityNumber} {cityOddOrEven}'
+                                 - 'I rolled {article} {cityNumber} {cityOddOrEven}'
+                     dialog:
+                        intents:
+                           -
+                              name: RollRegionIntent
+                              confirmationRequired: false
+                              slots:
+                                 -
+                                    name: regionNumber
+                                    type: AMAZON.NUMBER
+                                    elicitationRequired: false
+                                    confirmationRequired: false
+                                 -
+                                    name: regionOddOrEven
+                                    type: OddOrEven
+                                    elicitationRequired: false
+                                    confirmationRequired: false
+                           -
+                              name: ChangeRegionIntent
+                              confirmationRequired: false
+                              slots:
+                                 -
+                                    name: rolledDestinationRegion
+                                    type: Region
+                                    elicitationRequired: false
+                                    confirmationRequired: false
+                                 -
+                                    name: destinationRegion
+                                    type: Region
+                                    elicitationRequired: false
+                                    confirmationRequired: false
+                           -
+                              name: RollCityIntent
+                              confirmationRequired: false
+                              slots:
+                                 -
+                                    name: cityNumber
+                                    type: AMAZON.NUMBER
+                                    elicitationRequired: false
+                                    confirmationRequired: false
+                                 -
+                                    name: cityOddOrEven
+                                    type: OddOrEven
+                                    elicitationRequired: false
+                                    confirmationRequired: false
 
 plugins:
    - serverless-alexa-skills

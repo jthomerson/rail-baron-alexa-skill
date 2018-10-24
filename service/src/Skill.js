@@ -8,7 +8,9 @@ var Alexa = require('ask-sdk-core'),
 exports.handler = skillBuilder
    .addRequestHandlers(
    require('./handlers/LaunchRequestHandler'),
-   require('./handlers/RollIntentHandler'),
+   require('./handlers/RollRegionIntentHandler'),
+   require('./handlers/ChangeRegionIntentHandler'),
+   require('./handlers/RollCityIntentHandler'),
    require('./handlers/ExitHandler'),
    require('./handlers/SessionEndedHandler')
    )
