@@ -18,9 +18,32 @@ I genuinely appreciate external contributions. As part of the Silvermine team, I
 [extensive documentation](contribute) on how you can contribute.
 
 
+## Developing
+
+Cheat sheet for using the [Serverless Alexa Skills plugin][sls-skills]. Note that all
+these commands must be run from inside `./service` since that's where the Serverless
+service itself resides (to separate the run-time node dependencies from the build-time /
+dev dependencies).
+
+```
+# authenticate to the Amazon Developer Portal so you can run `sls alexa` commands
+sls alexa auth
+
+# Update Alexa Skill Manifests
+sls alexa update
+
+# List your Alexa Interaction Models
+sls alexa models
+
+# Update and build your Alexa Interaction Models
+sls alexa build
+```
+
+
 ## License
 
 This software is released under the MIT license. See [the license file](LICENSE) for more
 details.
 
 [contribute]: https://github.com/silvermine/silvermine-info#contributing
+[sls-skills]: https://github.com/marcy-terui/serverless-alexa-skills/
