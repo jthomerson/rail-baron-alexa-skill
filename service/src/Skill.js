@@ -3,14 +3,14 @@
 var Alexa = require('ask-sdk-core'),
     skillBuilder = Alexa.SkillBuilders.custom();
 
-/* eslint-disable no-global-require */
+/* eslint-disable global-require */
 
 exports.handler = skillBuilder
    .addRequestHandlers(
    require('./handlers/LaunchRequestHandler'),
    require('./handlers/RollRegionIntentHandler'),
-   require('./handlers/ChangeRegionIntentHandler'),
    require('./handlers/RollCityIntentHandler'),
+   require('./handlers/PayoutIntentHandler'),
    require('./handlers/ExitHandler'),
    require('./handlers/SessionEndedHandler')
    )

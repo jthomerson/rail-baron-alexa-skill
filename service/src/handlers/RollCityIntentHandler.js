@@ -14,24 +14,29 @@ module.exports = {
 
    handle: function handle(handlerInput) {
       var filledSlots = handlerInput.requestEnvelope.request.intent.slots,
-          number = parseInt(getSlotValue(filledSlots, 'cityNumber'), 10),
-          oddOrEven = getSlotValue(filledSlots, 'cityOddOrEven'),
+          number = parseInt(getSlotValue(filledSlots, 'rolledNumber'), 10),
+          oddOrEven = getSlotValue(filledSlots, 'rolledOddOrEven'),
+          regionKey = getSlotValue(filledSlots, 'region', 'id'),
           isOdd = (oddOrEven === 'odd'),
-          // TODO: because of the (presumably wrong) way I'm using intents, I don't have
-          // access to the region here ...
-          region = RB.model.Region.ALL[0],
-          city = RB.services.destination.lookupCity(region, number, isOdd),
-          speech;
+          region, city, speech;
 
-      speech = util.format(
-         'You rolled a %d %s in the %s. %s',
-         number,
-         oddOrEven,
-         region.getName(),
-         city ? ('You\'re going to ' + city.getName() + '. Where are you coming from?') : 'I don\'t know where that goes'
-      );
+      region = RB.model.Region.find_by_key(regionKey);
 
-      return handlerInput.responseBuilder.speak(speech).addConfirmIntentDirective().getResponse();
+      if (region) {
+         city = RB.services.destination.lookupCity(region, number, isOdd);
+
+         speech = util.format(
+            'You rolled a %d %s in the %s. %s',
+            number,
+            oddOrEven,
+            region.getName(),
+            city ? ('You\'re going to ' + city.getName()) : 'I don\'t know what city that is.'
+         );
+      } else {
+         speech = 'I could not understand what region you were rolling in. Please try again.';
+      }
+
+      return handlerInput.responseBuilder.speak(speech).withShouldEndSession(false).getResponse();
    },
 
 };

@@ -43,102 +43,80 @@ custom:
                                  - { name: { value: even } }
                            -
                               name: Region
-                              values:
-                                 - { name: { value: Northeast } }
-                                 - { name: { value: Southeast } }
-                                 - { name: { value: North Central } }
-                                 - { name: { value: South Central } }
-                                 - { name: { value: Plains } }
-                                 - { name: { value: Northwest } }
-                                 - { name: { value: Southwest } }
+                              values: ${file(./src/list-names-for-model.js):regions}
+                           -
+                              name: City
+                              values: ${file(./src/list-names-for-model.js):cities}
                         intents:
                            -
                               name: RollRegionIntent
                               slots:
                                  -
-                                    name: regionNumber
+                                    name: rolledNumber
                                     type: AMAZON.NUMBER
                                  -
-                                    name: regionOddOrEven
+                                    name: rolledOddOrEven
                                     type: OddOrEven
                                  -
                                     name: article
                                     type: ArticleType
                               samples:
-                                 - '{regionNumber} {regionOddOrEven}'
-                                 - '{article} {regionNumber} {regionOddOrEven}'
-                                 - 'I rolled {article} {regionNumber} {regionOddOrEven}'
-                           -
-                              name: ChangeRegionIntent
-                              slots:
-                                 -
-                                    name: rolledDestinationRegion
-                                    type: Region
-                                 -
-                                    name: destinationRegion
-                                    type: Region
-                              samples:
-                                 - 'I am already in the {rolledDestinationRegion} I want to go to the {destinationRegion}'
+                                 - '{rolledNumber} {rolledOddOrEven}'
+                                 - '{article} {rolledNumber} {rolledOddOrEven}'
+                                 - 'I rolled {article} {rolledNumber} {rolledOddOrEven}'
+                                 - 'What region is {rolledNumber} {rolledOddOrEven}'
+                                 - 'What region {rolledNumber} {rolledOddOrEven} is'
                            -
                               name: RollCityIntent
                               slots:
                                  -
-                                    name: cityNumber
+                                    name: rolledNumber
                                     type: AMAZON.NUMBER
                                  -
-                                    name: cityOddOrEven
+                                    name: rolledOddOrEven
                                     type: OddOrEven
+                                 -
+                                    name: region
+                                    type: Region
                                  -
                                     name: article
                                     type: ArticleType
                               samples:
-                                 - '{cityNumber} {cityOddOrEven}'
-                                 - '{article} {cityNumber} {cityOddOrEven}'
-                                 - 'I rolled {article} {cityNumber} {cityOddOrEven}'
-                     dialog:
-                        intents:
+                                 - '{rolledNumber} {rolledOddOrEven} in the {region}'
+                                 - '{article} {rolledNumber} {rolledOddOrEven} in the {region}'
+                                 - 'I rolled {article} {rolledNumber} {rolledOddOrEven} in the {region}'
+                                 - 'What city is {rolledNumber} {rolledOddOrEven} in the {region}'
+                                 - 'What city {rolledNumber} {rolledOddOrEven} is in the {region}'
                            -
-                              name: RollRegionIntent
-                              confirmationRequired: false
+                              name: PayoutIntent
                               slots:
                                  -
-                                    name: regionNumber
-                                    type: AMAZON.NUMBER
-                                    elicitationRequired: false
-                                    confirmationRequired: false
+                                    name: originCity
+                                    type: City
                                  -
-                                    name: regionOddOrEven
-                                    type: OddOrEven
-                                    elicitationRequired: false
-                                    confirmationRequired: false
-                           -
-                              name: ChangeRegionIntent
-                              confirmationRequired: false
-                              slots:
-                                 -
-                                    name: rolledDestinationRegion
-                                    type: Region
-                                    elicitationRequired: false
-                                    confirmationRequired: false
-                                 -
-                                    name: destinationRegion
-                                    type: Region
-                                    elicitationRequired: false
-                                    confirmationRequired: false
-                           -
-                              name: RollCityIntent
-                              confirmationRequired: false
-                              slots:
-                                 -
-                                    name: cityNumber
-                                    type: AMAZON.NUMBER
-                                    elicitationRequired: false
-                                    confirmationRequired: false
-                                 -
-                                    name: cityOddOrEven
-                                    type: OddOrEven
-                                    elicitationRequired: false
-                                    confirmationRequired: false
+                                    name: destinationCity
+                                    type: City
+                              samples:
+                                 - 'How much from {originCity} to {destinationCity}'
+                                 - 'How much I make from {originCity} to {destinationCity}'
+                                 - 'How much do I make from {originCity} to {destinationCity}'
+                                 - 'How much is paid from {originCity} to {destinationCity}'
+                                 - 'What is the pay from {originCity} to {destinationCity}'
+                                 - 'What the pay is from {originCity} to {destinationCity}'
+                                 - 'What the payout is from {originCity} to {destinationCity}'
+                                 - 'Money from {originCity} to {destinationCity}'
+                                 - 'Payout from {originCity} to {destinationCity}'
+                                 # all the same phrases, but "between X and Y" instead of
+                                 # "from X to Y"
+                                 - 'How much between {originCity} and {destinationCity}'
+                                 - 'How much I make between {originCity} and {destinationCity}'
+                                 - 'How much do I make between {originCity} and {destinationCity}'
+                                 - 'How much is paid between {originCity} and {destinationCity}'
+                                 - 'What is the pay between {originCity} and {destinationCity}'
+                                 - 'What the pay is between {originCity} and {destinationCity}'
+                                 - 'What the payout is between {originCity} and {destinationCity}'
+                                 - 'Money between {originCity} and {destinationCity}'
+                                 - 'Payout between {originCity} and {destinationCity}'
 
 plugins:
    - serverless-alexa-skills

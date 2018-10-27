@@ -6,8 +6,8 @@ module.exports = {
       return true;
    },
 
-   handle: function handle(handlerInput, error) {
-      console.log('Error handled:', error.message); // eslint-disable-line no-console
+   handle: function handle(handlerInput, err) {
+      console.log('Error handled:', err.message, err.stack); // eslint-disable-line no-console
 
       return handlerInput.responseBuilder
          .speak('Sorry, I can\'t understand the command. Please try again.')

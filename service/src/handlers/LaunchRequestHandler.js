@@ -3,7 +3,6 @@
 module.exports = {
 
    canHandle: function canHandle(handlerInput) {
-      console.log('canHandle(%s)', JSON.stringify(handlerInput, null, 3)); // eslint-disable-line no-console
       return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
    },
 
