@@ -20,7 +20,39 @@ custom:
                publishingInformation:
                   locales:
                      en-US:
-                        name: rail-baron
+                        name: Rail Baron Assistant
+                        summary: 'Provides destinations and payout information for the Avalon Hill Rail Baron game.'
+                        examplePhrases:
+                           - 'Alexa, tell Rail Baron I rolled a 10 odd'
+                           - 'Alexa, tell Rail Baron 6 even in the Northeast'
+                           - 'Alexa, ask Rail Baron how much I make between Seattle and Philadelphia'
+                        keywords: [ 'rail', 'baron', 'train', 'game', 'destination', 'dice', 'roll', 'avalon', 'hill', 'payout' ]
+                        # TODO: icons here?
+                        description: >
+                           If you play Rail Baron, you know what a PAIN it is to look up
+                           destination regions and cities and the payout between them, and
+                           how much that slows down your game play. Why do that when Alexa
+                           can do it for you?
+
+                           For example, here's an interaction you can have with Alexa when
+                           you use Rail Baron Assistant:
+
+                            * You: Alexa, play Rail Baron
+                            * Alexa: Let's play some Rail Baron! What did you roll?
+                            * You: 10 odd
+                            * Alexa: You rolled a 10 odd. You're going to the Northeast.
+                              What did you roll for a city? For example, "I rolled a four
+                              odd in the Northeast"
+                            * You: Six even in the Northeast.
+                            * Alexa: You rolled a 6 even in the Northeast. You're going to Philadelphia.
+                            * You: Alexa, ask Rail Baron how much from Portland, Maine to Philadelphia?
+                            * Alexa: You will make $4500 from Portland, Maine to Philadelphia
+
+                           Or, ask her simple questions each time you need, like this:
+
+                            * Alexa, tell Rail Baron I rolled a 10 odd
+                            * Alexa, tell Rail Baron 6 even in the Northeast
+                            * Alexa, ask Rail Baron how much I make between Seattle and Philadelphia
                apis:
                   custom:
                      endpoint:
