@@ -1,7 +1,6 @@
 {
   "name": "rail-baron-alexa-skill-sls-service",
   "description": "The actual Serverless service for the skill",
-  "version": "1.0.0",
   "main": "src/Skill.js",
   "author": "Jeremy Thomerson",
   "license": "MIT",
