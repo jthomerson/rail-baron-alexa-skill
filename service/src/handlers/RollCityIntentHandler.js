@@ -36,7 +36,7 @@ module.exports = {
          speech = 'I could not understand what region you were rolling in. Please try again.';
       }
 
-      return handlerInput.responseBuilder.speak(speech).withShouldEndSession(false).getResponse();
+      return handlerInput.responseBuilder.speak(speech).withShouldEndSession(true).getResponse();
    },
 
 };

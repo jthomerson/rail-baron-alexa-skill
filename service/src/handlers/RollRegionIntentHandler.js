@@ -18,16 +18,22 @@ module.exports = {
           oddOrEven = getSlotValue(filledSlots, 'rolledOddOrEven'),
           isOdd = (oddOrEven === 'odd'),
           region = RB.services.destination.lookupRegion(number, isOdd),
-          speech;
+          speech = util.format('You rolled a %d %s.', number, oddOrEven),
+          reprompt, builder;
 
-      speech = util.format(
-         'You rolled a %d %s. %s',
-         number,
-         oddOrEven,
-         region ? ('You\'re going to the ' + region.getName()) : 'I don\'t know where that goes. Try again'
-      );
+      if (region) {
+         speech += util.format(' You\'re going to the %s. What did you roll for a city?', region.getName());
+         speech += util.format(' For example, "I rolled a four odd in the %s"', region.getName());
+         reprompt = 'What did you roll for a city? For example, I rolled a four even in the Southeast';
+      } else {
+         speech += 'I don\'t know where that goes. Please try again.';
+      }
 
-      return handlerInput.responseBuilder.speak(speech).withShouldEndSession(false).getResponse();
+      builder = handlerInput.responseBuilder.speak(speech).withShouldEndSession(false);
+      if (reprompt) {
+         builder.reprompt(reprompt);
+      }
+      return builder.getResponse();
    },
 
 };

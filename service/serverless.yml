@@ -49,6 +49,15 @@ custom:
                               values: ${file(./src/list-names-for-model.js):cities}
                         intents:
                            -
+                              name: AMAZON.CancelIntent
+                              samples: []
+                           -
+                              name: AMAZON.HelpIntent
+                              samples: []
+                           -
+                              name: AMAZON.StopIntent
+                              samples: []
+                           -
                               name: RollRegionIntent
                               slots:
                                  -

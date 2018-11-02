@@ -12,6 +12,7 @@ exports.handler = skillBuilder
    require('./handlers/RollCityIntentHandler'),
    require('./handlers/PayoutIntentHandler'),
    require('./handlers/ExitHandler'),
+   require('./handlers/HelpHandler'),
    require('./handlers/SessionEndedHandler')
    )
    .addErrorHandlers(require('./handlers/ErrorHandler'))
