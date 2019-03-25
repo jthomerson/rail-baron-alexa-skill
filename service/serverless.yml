@@ -164,7 +164,7 @@ plugins:
 
 provider:
    name: aws
-   runtime: nodejs6.10
+   runtime: nodejs8.10
    stackTags: # STAGE is automatically added by SLS
       CODE_VERSION: ${file(../node_modules/silvermine-serverless-utils/src/get-code-version.js):both}
       SLS_SVC_NAME: ${self:service}
