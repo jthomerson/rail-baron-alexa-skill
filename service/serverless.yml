@@ -1,6 +1,6 @@
 service: rail-baron-alexa-skill
 
-frameworkVersion: 1.32.0
+frameworkVersion: 1.40.0
 
 custom:
    defaultRegion: us-east-1
