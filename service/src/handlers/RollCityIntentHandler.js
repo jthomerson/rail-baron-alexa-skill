@@ -26,17 +26,17 @@ module.exports = {
          city = RB.services.destination.lookupCity(region, number, isOdd);
 
          speech = util.format(
-            'You rolled a %d %s in the %s. %s',
+            'You rolled a %d %s in the %s. %s Anything else?',
             number,
             oddOrEven,
             region.getName(),
             city ? ('You\'re going to ' + city.getName()) : 'I don\'t know what city that is.'
          );
       } else {
-         speech = 'I could not understand what region you were rolling in. Please try again.';
+         speech = 'I could not understand what region you were rolling in. Please try again. What did you roll?';
       }
 
-      return handlerInput.responseBuilder.speak(speech).withShouldEndSession(true).getResponse();
+      return handlerInput.responseBuilder.speak(speech).withShouldEndSession(false).getResponse();
    },
 
 };

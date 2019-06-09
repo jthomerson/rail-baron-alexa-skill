@@ -8,7 +8,7 @@ module.exports = {
 
    handle: function handle(handlerInput) {
       return handlerInput.responseBuilder
-         .speak('Let\'s play some Rail Baron! What did you roll?')
+         .speak('Let\'s play some Rail Baron! How can I help?')
          .reprompt('What did you roll?')
          .getResponse();
    },

@@ -23,7 +23,6 @@ module.exports = {
 
       if (region) {
          speech += util.format(' You\'re going to the %s. What did you roll for a city?', region.getName());
-         speech += util.format(' For example, "I rolled a four odd in the %s"', region.getName());
          reprompt = 'What did you roll for a city? For example, I rolled a four even in the Southeast';
       } else {
          speech += 'I don\'t know where that goes. Please try again.';
